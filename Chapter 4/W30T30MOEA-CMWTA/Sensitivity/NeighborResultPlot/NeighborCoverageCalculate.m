@@ -1,0 +1,79 @@
+
+load TargetWeight.mat
+TargetValue = sum(TargetWeight);
+figure(1);
+
+MN2MN1 = zeros(30,1);
+MN1MN2 = zeros(30,1);
+for i = 1 : 30
+    
+    FileName1 = ['MOEANeighborFitnessRecord2',num2str(i),'.mat'];
+    load(FileName1);
+    temp1 = MOEANeighborFitnessRecord;
+    
+    FileName2 = ['MOEANeighborFitnessRecord1',num2str(i),'.mat'];
+    load(FileName2);
+    temp2 = MOEANeighborFitnessRecord;
+    
+    [ MN2MN1(i,1), MN1MN2(i,1) ] = CoverageCalculate( temp1(:,100), temp2(:,100), TargetValue );
+    
+end
+subplot(2,2,1);
+boxplot([MN2MN1,MN1MN2],'Notch','on','Labels',{'I(M2,M1)','I(M1,M2)'});
+
+MN2MN3 = zeros(30,1);
+MN3MN2 = zeros(30,1);
+for i = 1 : 30
+    
+    FileName1 = ['MOEANeighborFitnessRecord2',num2str(i),'.mat'];
+    load(FileName1);
+    temp1 = MOEANeighborFitnessRecord;
+    
+    FileName2 = ['MOEANeighborFitnessRecord3',num2str(i),'.mat'];
+    load(FileName2);
+    temp2 = MOEANeighborFitnessRecord;
+    
+    [ MN2MN3(i,1), MN3MN2(i,1) ] = CoverageCalculate( temp1(:,100), temp2(:,100), TargetValue );
+    
+end
+subplot(2,2,2);
+boxplot([MN2MN3,MN3MN2],'Notch','on','Labels',{'I(M2,M3)','I(M3,M2)'});
+
+MN2MN4 = zeros(30,1);
+MN4MN2 = zeros(30,1);
+for i = 1 : 30
+    
+    FileName1 = ['MOEANeighborFitnessRecord2',num2str(i),'.mat'];
+    load(FileName1);
+    temp1 = MOEANeighborFitnessRecord;
+    
+    FileName2 = ['MOEANeighborFitnessRecord4',num2str(i),'.mat'];
+    load(FileName2);
+    temp2 = MOEANeighborFitnessRecord;
+    
+    [ MN2MN4(i,1), MN4MN2(i,1) ] = CoverageCalculate( temp1(:,100), temp2(:,100), TargetValue );
+    
+end
+subplot(2,2,3);
+boxplot([MN2MN4,MN4MN2],'Notch','on','Labels',{'I(M2,M4)','I(M4,M2)'});
+
+MN2MN5 = zeros(30,1);
+MN5MN2 = zeros(30,1);
+for i = 1 : 30
+    
+    FileName1 = ['MOEANeighborFitnessRecord2',num2str(i),'.mat'];
+    load(FileName1);
+    temp1 = MOEANeighborFitnessRecord;
+    
+    FileName2 = ['MOEANeighborFitnessRecord5',num2str(i),'.mat'];
+    load(FileName2);
+    temp2 = MOEANeighborFitnessRecord;
+    
+    [ MN2MN5(i,1), MN5MN2(i,1) ] = CoverageCalculate( temp1(:,100), temp2(:,100), TargetValue );
+    
+end
+subplot(2,2,4);
+boxplot([MN2MN5,MN5MN2],'Notch','on','Labels',{'I(M2,M5)','I(M5,M2)'});
+
+File = [pwd,'/NeighborPlot/NCBP.eps']
+print('-depsc',File)

@@ -1,0 +1,43 @@
+
+%load TargetWeight.mat
+
+ParetoSet = zeros(6,1);
+for i = 1 : 10
+    
+    for j = 1 : 30
+        
+        FileName1 = ['SizeFitnessRecord',num2str(i),num2str(j),'.mat'];
+        load(FileName1);
+        
+        for m = 2 : 6
+            if ParetoSet(m,1) == 0 || SizeFitnessRecord{100,m}.Fitness(1,1) < ParetoSet(m,1)
+                ParetoSet(m,1) = SizeFitnessRecord{100,m}.Fitness(1,1);
+            end
+        end
+        
+    end
+    
+end
+
+SizeFitnessConvergence = zeros(30,10);
+for i = 1 : 10
+    
+    for j = 1 : 30
+        
+        FileName1 = ['SizeFitnessRecord',num2str(i),num2str(j),'.mat'];
+        load(FileName1);
+        
+        tempVar = zeros(6,1);
+        for k = 2 : 6
+            tempVar(k,1) = SizeFitnessRecord{100,k}.Fitness(1,1);
+        end
+        
+        SizeFitnessConvergence(j,i) = ConvergenceFitness( ParetoSet, tempVar );
+        
+    end
+    
+end
+
+boxplot(SizeFitnessConvergence);
+ylabel('Convergence');
+xlabel('Percentage of effective populaiton to population');

@@ -1,0 +1,13 @@
+Stage 1
+target 3 is survived by platform 3 using weapon 2
+target 6 is killed by plarform 1 using weapon 2
+target 7 is killed by plarform 2 using weapon 1
+target 5 is killed by plarform 4 using weapon 2
+Stage 2
+target 1 is killed by plarform 3 using weapon 1
+target 8 is killed by plarform 4 using weapon 1
+target 2 is killed by plarform 2 using weapon 2
+target 4 is survived by platform 1 using weapon 1
+Stage 3
+target 3 is killed by plarform 3 using weapon 4
+Stage 4
